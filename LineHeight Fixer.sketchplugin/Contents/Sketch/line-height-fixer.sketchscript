@@ -1,38 +1,34 @@
-var onRun = function ( context ) {
+var onRun = function (context) {
 	var doc = context.document;
 	var sel = context.selection;
-	var range = NSMakeRange( 0, 1 );
-	var fontList = doc.documentData().fontList();
-	fontList.reloadFonts();
-	var installedFonts = fontList.allFonts();
+	var range = NSMakeRange(0, 1);
+	var installedFonts = NSFontManager.sharedFontManager().availableFontFamilies();
 	var AdobeBlankInstalled = false;
 
-	for ( var i = 0; i < installedFonts.count(); i++ ) {
-		if ( 'Adobe Blank' == installedFonts[i]) {
+	for (var i = 0; i < installedFonts.count(); i++) {
+		if ('Adobe Blank' == installedFonts[i]) {
 			AdobeBlankInstalled = true;
 			break;
 		}
 	}
 
-	if ( !AdobeBlankInstalled ) {
-		doc.showMessage( 'Please install the font: "Adobe Blank".' );
+	if (!AdobeBlankInstalled) {
+		doc.showMessage('Please install the font: "Adobe Blank".');
 		return false;
 	}
 
-	for ( var i = 0; i < sel.count(); i++ ) {
-		if ( 'MSTextLayer' == sel[i].class() ) {
+	for (var i = 0; i < sel.count(); i++) {
+		if ('MSTextLayer' == sel[i].class()) {
 			var textLayer  = sel[i];
 			var textSize   = textLayer.fontSize();
-			var textFont   = NSFont.fontWithName_size_( "AdobeBlank", textSize );
+			var textFont   = NSFont.fontWithName_size_('AdobeBlank', textSize);
 			var textString = textLayer.stringValue();
-			if ( ' ' != textString.substring( 0, 1 )) {
+			if (' ' != textString.substring(0, 1)) {
 				textString = ' ' + textString;
 			}
 			
-			textLayer.setIsEditingText( true );
-			textLayer.setStringValue( textString );
-			textLayer.addAttribute_value_forRange( NSFontAttributeName, textFont, range );
-			textLayer.setIsEditingText( false );
+			textLayer.setStringValue(textString);
+			textLayer.addAttribute_value_forRange_(NSFontAttributeName, textFont, range);
 		}
 	}
 }

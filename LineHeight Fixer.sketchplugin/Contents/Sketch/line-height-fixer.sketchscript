@@ -21,7 +21,7 @@ var onRun = function (context) {
 		if ('MSTextLayer' == sel[i].class()) {
 			var textLayer  = sel[i];
 			var textSize   = textLayer.fontSize();
-			var textFont   = NSFont.fontWithName_size_('AdobeBlank', textSize);
+			var textFont   = NSFont.fontWithName_size_('Avenir', textSize);
 			var textString = textLayer.stringValue();
 			if (' ' != textString.substring(0, 1)) {
 				textString = ' ' + textString;

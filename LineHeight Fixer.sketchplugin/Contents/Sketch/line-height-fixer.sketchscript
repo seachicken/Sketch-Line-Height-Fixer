@@ -1,7 +1,6 @@
 var onRun = function (context) {
 	var doc = context.document;
 	var sel = context.selection;
-	var range = NSMakeRange(0, 1);
 	var installedFonts = NSFontManager.sharedFontManager().availableFontFamilies();
 	var AdobeBlankInstalled = false;
 
@@ -22,13 +21,19 @@ var onRun = function (context) {
 			var textLayer  = sel[i];
 			var textSize   = textLayer.fontSize();
 			var textFont   = NSFont.fontWithName_size_('Avenir', textSize);
-			var textString = textLayer.stringValue();
-			if (' ' != textString.substring(0, 1)) {
-				textString = ' ' + textString;
+			var text = String(textLayer.stringValue());
+			
+			if (' ' != text.slice(-1)) {
+				text += ' ';
+				textLayer.setStringValue(text);
 			}
 			
-			textLayer.setStringValue(textString);
+			var range = NSMakeRange(getTailLocation(text), 1);
 			textLayer.addAttribute_value_forRange_(NSFontAttributeName, textFont, range);
 		}
 	}
+}
+
+function getTailLocation(text) {
+	return text.length - 1;
 }

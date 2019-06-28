@@ -1,29 +1,31 @@
+var FONT_NAME = 'Noto Sans CJK JP';
+
 var onRun = function (context) {
 	var doc = context.document;
 	var sel = context.selection;
 	var installedFonts = NSFontManager.sharedFontManager().availableFontFamilies();
-	var AdobeBlankInstalled = false;
-
+	
+	var fontExists = false;
 	for (var i = 0; i < installedFonts.count(); i++) {
-		if ('Adobe Blank' == installedFonts[i]) {
-			AdobeBlankInstalled = true;
+		if (installedFonts[i] == FONT_NAME) {
+			fontExists = true;
 			break;
 		}
 	}
 
-	if (!AdobeBlankInstalled) {
-		doc.showMessage('Please install the font: "Adobe Blank".');
+	if (!fontExists) {
+		doc.showMessage('Please install the font: ' + FONT_NAME + ' at https://www.google.com/get/noto/.');
 		return false;
 	}
 
 	for (var i = 0; i < sel.count(); i++) {
-		if ('MSTextLayer' == sel[i].class()) {
+		if (sel[i].class() == 'MSTextLayer') {
 			var textLayer  = sel[i];
 			var textSize   = textLayer.fontSize();
-			var textFont   = NSFont.fontWithName_size_('Avenir', textSize);
+			var textFont   = NSFont.fontWithName_size_(FONT_NAME, textSize);
 			var text = String(textLayer.stringValue());
 			
-			if (' ' != text.slice(-1)) {
+			if (text.slice(-1) != ' ') {
 				text += ' ';
 				textLayer.setStringValue(text);
 			}

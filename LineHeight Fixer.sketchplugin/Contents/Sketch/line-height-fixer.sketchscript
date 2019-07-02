@@ -1,9 +1,9 @@
-var FONT_NAME = 'Noto Sans CJK JP';
+var FONT_NAME = 'NotoSansCJKjp-Regular';
 
 var onRun = function (context) {
 	var doc = context.document;
 	var sel = context.selection;
-	var installedFonts = NSFontManager.sharedFontManager().availableFontFamilies();
+	var installedFonts = NSFontManager.sharedFontManager().availableFonts();
 	
 	var fontExists = false;
 	for (var i = 0; i < installedFonts.count(); i++) {

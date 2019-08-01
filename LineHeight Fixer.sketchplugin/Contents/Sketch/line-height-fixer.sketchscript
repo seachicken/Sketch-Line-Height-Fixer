@@ -1,34 +1,41 @@
+var FONT_NAME = 'NotoSansCJKjp-Regular';
+
 var onRun = function (context) {
 	var doc = context.document;
 	var sel = context.selection;
-	var range = NSMakeRange(0, 1);
-	var installedFonts = NSFontManager.sharedFontManager().availableFontFamilies();
-	var AdobeBlankInstalled = false;
-
+	var installedFonts = NSFontManager.sharedFontManager().availableFonts();
+	
+	var fontExists = false;
 	for (var i = 0; i < installedFonts.count(); i++) {
-		if ('Adobe Blank' == installedFonts[i]) {
-			AdobeBlankInstalled = true;
+		if (installedFonts[i] == FONT_NAME) {
+			fontExists = true;
 			break;
 		}
 	}
 
-	if (!AdobeBlankInstalled) {
-		doc.showMessage('Please install the font: "Adobe Blank".');
+	if (!fontExists) {
+		doc.showMessage('Please install the font: ' + FONT_NAME + ' at https://www.google.com/get/noto/.');
 		return false;
 	}
 
 	for (var i = 0; i < sel.count(); i++) {
-		if ('MSTextLayer' == sel[i].class()) {
+		if (sel[i].class() == 'MSTextLayer') {
 			var textLayer  = sel[i];
 			var textSize   = textLayer.fontSize();
-			var textFont   = NSFont.fontWithName_size_('AdobeBlank', textSize);
-			var textString = textLayer.stringValue();
-			if (' ' != textString.substring(0, 1)) {
-				textString = ' ' + textString;
+			var textFont   = NSFont.fontWithName_size_(FONT_NAME, textSize);
+			var text = String(textLayer.stringValue());
+			
+			if (text.slice(-1) != ' ') {
+				text += ' ';
+				textLayer.setStringValue(text);
 			}
 			
-			textLayer.setStringValue(textString);
+			var range = NSMakeRange(getTailLocation(text), 1);
 			textLayer.addAttribute_value_forRange_(NSFontAttributeName, textFont, range);
 		}
 	}
+}
+
+function getTailLocation(text) {
+	return text.length - 1;
 }

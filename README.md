@@ -1,11 +1,11 @@
 Sketch Line-Height Fixer
 ========================
 
-Improve line-height behaviour into apply "Adobe Blank" to the first character.
+Improve line-height behaviour into apply "Noto Sans" to the last character.
 
 ## Usage
 
-Your PC require install the "Adobe Blank". Please Download and install the [Adobe Blank][3].
+Your PC require install the "Noto Sans". Please Download and install the [Noto Sans][3].
 
 1. Select Text Layer(s).
 1. Choose **Plugins › Line-Height Fixer**.
@@ -18,11 +18,11 @@ Your PC require install the "Adobe Blank". Please Download and install the [Adob
 Sketch Line-Height Fixer（Japanese）
 ===================================
 
-テキストの最初にAdobe Blankを適用したスペースを追加し、行間問題を緩和するプラグインです。
+テキストの最後にNoto Sansを適用したスペースを追加し、行間問題を緩和するプラグインです。
 
 ## 使い方
 
-このプラグインを使うには、フォント「Adobe Blank」が必要です。[Adobe Blankのリポジトリからダウンロード][3]・インストールしてください。
+このプラグインを使うには、フォント「Noto Sans」が必要です。[Noto Sansをダウンロード][3]・インストールしてください。
 
 1. テキストレイヤーを選択します（複数可）。
 1. プラグインから「Line-Height Fixer」を選択します。
@@ -57,5 +57,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
  [1]: https://github.com/littlebusters/Sketch-Line-Height-Fixer/tree/for-sketch3.5.x
- [2]: https://github.com/littlebusters/Sketch-Line-Height-Fixer/archive/master.zip
- [3]: https://github.com/adobe-fonts/adobe-blank
+ [2]: https://github.com/seachicken/Sketch-Line-Height-Fixer/archive/fix-line.zip
+ [3]: https://noto-website-2.storage.googleapis.com/pkgs/NotoSansCJKjp-hinted.zip
